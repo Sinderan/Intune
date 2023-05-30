@@ -1,4 +1,4 @@
-$Program = "" ##Beginning of Desktop Shortcut Name e.g. "R " for "R 3.4.0"
+$Program = "" ##Beginning of Desktop Shortcut Name with optional Wildcard e.g. "R *" for "R 3.4.0"
 
 function Sync-Explorer { 
     $code = @' 
@@ -31,8 +31,8 @@ public static void Refresh()  {
 
 $PublicDesktopPath = [Environment]::GetFolderPath("CommonDesktopDirectory")
 $UserDesktopPath = [Environment]::GetFolderPath("Desktop")
-$PublicShortcutPath = Resolve-Path "$PublicDesktopPath\$Program*.lnk" -ErrorAction SilentlyContinue -ErrorVariable _frperror
-$UserShortcutPath = Resolve-Path "$UserDesktopPath\$Program*.lnk" -ErrorAction SilentlyContinue -ErrorVariable _frperror
+$PublicShortcutPath = Resolve-Path "$PublicDesktopPath\$Program.lnk" -ErrorAction SilentlyContinue -ErrorVariable _frperror
+$UserShortcutPath = Resolve-Path "$UserDesktopPath\$Program.lnk" -ErrorAction SilentlyContinue -ErrorVariable _frperror
 if (-not($PublicShortcutPath)) {
     $PublicShortcutPath = $_frperror[0].TargetObject
 }
